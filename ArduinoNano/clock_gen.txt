@@ -1,0 +1,10 @@
+  clockgen.setupPLL(SI5351_PLL_B, 16, 0, 1);              // 25*16=400 MHz
+  clockgen.setupMultisynth(1, SI5351_PLL_B, 625, 0, 1);   // 400M / 625 = 640 KHz
+  clockgen.setupRdiv(1, SI5351_R_DIV_64);                 // 640 KHz / 64 = 10 KHz
+  clockgen.setupMultisynth(2, SI5351_PLL_B, 625, 0, 1);   // 400M / 625 = 640 KHz
+  clockgen.setupRdiv(2, SI5351_R_DIV_128);                // 640 KHz / 128 = 5 KHz
+  Si5351 參數設定如上, CLK_1 = 10 KHz (脈波週期=100 us), CLK_2 = 5 KHz (脈波週期=200 us)
+
+D6 (10 KHz) 位置1=2  ..269..  位置2=271 (39 脈波 x 100 us = 3900 us) 3900 / 269 = 14.49814126394052
+D5 (5 KHz) 位置1=11  ..428..  位置2=439 (31 脈波 x 200 us = 6200 us) 6200 / 428 = 14.48598130841121
+   兩值取平均: (14.49814126394052 + 14.48598130841121) / 2 = 14.49206128617587 us/sample
